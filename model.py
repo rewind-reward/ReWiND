@@ -41,7 +41,7 @@ class ReWiNDTransformer(nn.Module):
         # Attention mask for causal self-attention
         self.attention_mask = nn.Transformer.generate_square_subsequent_mask(args.max_length + 1).to('cuda')
 
-    def forward(self, video_frames, text_embed, attention_mask=None):
+    def forward(self, video_frames, text_embed):
         batch_size = video_frames.shape[0]
         
         # Project inputs to common dimension
