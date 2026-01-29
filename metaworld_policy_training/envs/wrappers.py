@@ -373,16 +373,12 @@ class LearnedRewardWrapper(gym.Wrapper):
         if self.reward_at_every_step:
             reward = self._compute_reward()
             wandb.log({"train/learned_reward_per_step": reward})
-        if done:
-            wandb.log({"train/learned_reward": reward})
-
+            if done:
+                wandb.log({"train/learned_reward": reward})
         else:
             if done:
                 reward = self._compute_reward()
-
-                self.past_observations = {}
-                for key in self.image_keys:
-                    self.past_observations[key] = []
+                wandb.log({"train/learned_reward": reward})
             else:
                 reward = 0
 
